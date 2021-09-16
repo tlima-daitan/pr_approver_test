@@ -11,6 +11,11 @@ const main = async () => {
 
   const labelsList = labels.map(label => label.name);
 
+  console.log('label:', label);
+  console.log('number:', number);
+  console.log('labelsList:', labelsList);
+  console.log('labelsList.includes(label):', labelsList.includes(label));
+
   if (labelsList.includes(label)) {
     await octokit.rest.pulls.submitReview({
       ...github.context.repo,
