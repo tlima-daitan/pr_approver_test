@@ -1,25 +1,23 @@
-const github = require('@actions/github');
-const core = require('@actions/core');
+import github, { context } from '@actions/github';
+import { getInput, setFailed } from '@actions/core';
 
 const main = async () => {
-  const token = core.getInput('token');
-  const label = core.getInput('target-label');
+  const token = getInput('token');
+  const label = getInput('target-label');
   const octokit = github.getOctokit(token);
 
-  const { pull_request } = github.context.payload;
+  const { payload: pull_request } = context;
   const { number, labels } = pull_request;
 
   const labelsList = labels.map(label => label.name);
 
   if (labelsList.includes(label)) {
-    const approvePayload = {
-      ...github.context.repo,
-      pull_number: Number.parseInt(number, 10),
+    await octokit.rest.pulls.createReview({
+      ...context.repo,
+      pull_number: number,
       event: 'APPROVE'
-    }
-    await octokit.rest.pulls.createReview(approvePayload)
+    });
   }
-
 };
 
-main().catch(err => core.setFailed(err.message));
+main().catch(err => setFailed(err.message));
