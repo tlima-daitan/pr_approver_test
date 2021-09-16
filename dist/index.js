@@ -6341,6 +6341,7 @@ const main = async () => {
     const approvePayload = {
       ...github.context.repo,
       pull_number: Number.parseInt(number, 10),
+      review_id: Number.parseInt(number, 10),
       event: 'APPROVE'
     }
     console.log('approvePayload:', approvePayload);
