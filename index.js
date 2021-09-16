@@ -9,6 +9,10 @@ const main = async () => {
   const { pull_request } = github.context.payload;
   const { number, labels } = pull_request;
 
+  console.log('github.context.repo: ', github.context.repo);
+  console.log('labels: ', labels);
+  console.log('number: ', number);
+
   if (labels.includes(label)) {
     await octokit.rest.pulls.submitReview({
       ...github.context.repo,
