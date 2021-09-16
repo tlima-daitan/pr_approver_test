@@ -11,17 +11,14 @@ const main = async () => {
 
   const labelsList = labels.map(label => label.name);
 
-  console.log('label:', label);
-  console.log('number:', number);
-  console.log('labelsList:', labelsList);
-  console.log('labelsList.includes(label):', labelsList.includes(label));
-
   if (labelsList.includes(label)) {
-    await octokit.rest.pulls.submitReview({
+    const approvePayload = {
       ...github.context.repo,
-      pull_number: number,
+      pull_number: Number.parseInt(number, 10),
       event: 'APPROVE'
-    })
+    }
+    console.log('approvePayload:', approvePayload);
+    await octokit.rest.pulls.submitReview(approvePayload)
   }
 
 };
