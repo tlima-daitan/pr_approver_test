@@ -1,0 +1,14 @@
+name: "Auto PR approval"
+description: "Automatically approve PRs based on their labels."
+author: "Fabricio Montagnani"
+inputs:
+  token:
+    description: "Token for the repository. Can be passed in using {{ secrets.GITHUB_TOKEN }}"
+    required: true
+  target-label:
+    description: "Label that will trigger the approve"
+    required: true
+runs:
+  using: "node14"
+  main: "dist/index.js"
+  
