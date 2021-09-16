@@ -3,7 +3,7 @@ const core = require('@actions/core');
 
 const main = async () => {
   const token = core.getInput('token');
-  const label = core.getInput('target_label');
+  const label = core.getInput('target-label');
   const octokit = github.getOctokit(token);
 
   const { pull_request } = github.context.payload;
