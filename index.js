@@ -1,10 +1,12 @@
-import github, { context } from '@actions/github';
-import { getInput, setFailed } from '@actions/core';
+const github = require('@actions/github');
+const core = require('@actions/core');
 
 const main = async () => {
-  const token = getInput('token');
-  const label = getInput('target-label');
+  const token = core.getInput('token');
+  const label = core.getInput('target-label');
   const octokit = github.getOctokit(token);
+  const { context } = github;
+
 
   const { payload: pull_request } = context;
   const { number, labels } = pull_request;
