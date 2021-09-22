@@ -6341,6 +6341,7 @@ const main = async () => {
   const exclusionLabels = exclusionLabelsString && exclusionLabelsString.split(',');
 
   console.log('\n\n### ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ###');
+  console.log(labels);
   console.log(prLabels);
   console.log(approvalLabels);
   console.log(exclusionLabels);
