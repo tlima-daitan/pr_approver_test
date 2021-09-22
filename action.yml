@@ -9,6 +9,5 @@ inputs:
     description: "Label that will trigger the approve"
     required: true
 runs:
-  using: "node12"
-  main: "dist/index.js"
-  
+  using: node12
+  main: dist/index.js
