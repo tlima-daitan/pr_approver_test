@@ -6338,18 +6338,19 @@ const main = async () => {
 
   const prLabels = labels.map(label => label.name);
   const approvalLabels = approvalLabelsString.split(',');
-  const exclusionLabels = exclusionLabelsString && exclusionLabelsString.split(',');
+  const exclusionLabels = (exclusionLabelsString && exclusionLabelsString.split(',')) || [];
 
   console.log('\n\n### ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ###');
-  console.log(labels);
-  console.log(prLabels);
-  console.log(approvalLabels);
-  console.log(exclusionLabels);
+  console.log('labels: ', labels);
+  console.log('prLabels: ', prLabels);
+  console.log('approvalLabels: ', approvalLabels);
+  console.log('exclusionLabels: ', exclusionLabels);
   console.log('### ~~@~~ ~~@~~ ~~@~~ ~~@~~ ~~@~~ ~~@~~ ~~@~~ ###\n\n');
 
-  if (Array.isArray(exclusionLabels) && exclusionLabels.filter(exclusionLabel => prLabels.includes(exclusionLabel)).length > 0) return;
-
-  if (approvalLabels.filter(approvalLabel => prLabels.includes(approvalLabel)).length > 0) {
+  if (
+    exclusionLabels.filter(exclusionLabel => prLabels.includes(exclusionLabel)).length === 0
+    && approvalLabels.filter(approvalLabel => prLabels.includes(approvalLabel)).length > 0
+  ) {
     await octokit.rest.pulls.createReview({
       ...github.context.repo,
       pull_number: number,
