@@ -22,7 +22,7 @@ const main = async () => {
 
   if (Array.isArray(exclusionLabels) && exclusionLabels.filter(exclusionLabel => prLabels.includes(exclusionLabel)).length > 0) return;
 
-  if (approvalLabels.filter(approvalLabel => prLabels.includes(approvalLabel))) {
+  if (approvalLabels.filter(approvalLabel => prLabels.includes(approvalLabel)).length > 0) {
     await octokit.rest.pulls.createReview({
       ...github.context.repo,
       pull_number: number,
