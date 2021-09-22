@@ -3,7 +3,8 @@ const core = require('@actions/core');
 
 const main = async () => {
   const token = core.getInput('token');
-  const label = core.getInput('target-label');
+  const approvalLabels = core.getInput('label-list');
+  const exclusionLabels = core.getInput('label-exclusion-list');
   const octokit = github.getOctokit(token);
 
   const { pull_request } = github.context.payload;
@@ -11,7 +12,14 @@ const main = async () => {
 
   const labelsList = labels.map(label => label.name);
 
-  if (labelsList.includes(label)) {
+  console.log('\n\n### ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ~~^~~ ###');
+  console.log(approvalLabels);
+  console.log(exclusionLabels);
+  console.log('### ~~@~~ ~~@~~ ~~@~~ ~~@~~ ~~@~~ ~~@~~ ~~@~~ ###\n\n');
+
+  if (Array.isArray(exclusionLabels) && exclusionLabels.filter(exclusionLabel => labelsList.includes(exclusionLabel)).length > 0) return;
+
+  if (approvalLabels.filter(approvalLabel => labelsList.includes(approvalLabel))) {
     await octokit.rest.pulls.createReview({
       ...github.context.repo,
       pull_number: number,

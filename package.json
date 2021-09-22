@@ -1,15 +1,17 @@
 {
-  "name": "pr-approval-action",
+  "name": "pr-approver-action",
   "version": "1.0.0",
-  "description": "Github action for approving pull requests",
+  "description": "Github action to auto-approve PRs based on labels",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist && rm -rf ./node_modules",
-    "build": "npm run clean && npm ci && ncc build index.js -o dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && npm ci && ncc build index.js -o dist"
   },
-  "author": "Fabricio Montagnani",
-  "license": "ISC",
+  "author": "NRCCUA",
+  "contributors": [
+    "Thiago L. Lima <tlima@daitan.com>",
+    "Fabricio Montagnani <fmontagnani@daitan.com>"
+  ],
   "dependencies": {
     "@actions/core": "1.5.0",
     "@actions/github": "5.0.0"

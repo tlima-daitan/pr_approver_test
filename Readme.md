@@ -1,6 +1,3 @@
-PR Auto Approver
+PR Approver Action
 
-A Github Action to automatically approve PRs according to a given label.
-
-Usage
-
+A Github action to auto-approve PRs based on labels.

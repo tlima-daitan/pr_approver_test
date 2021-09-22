@@ -1,13 +1,16 @@
-name: "Auto PR approval"
-description: "Automatically approve PRs based on their labels."
-author: "Fabricio Montagnani"
+name: PR Approver
+description: Automatically approve PRs based on their labels
+author: NRCCUA
 inputs:
   token:
     description: "Token for the repository. Can be passed in using {{ secrets.GITHUB_TOKEN }}"
     required: true
-  target-label:
-    description: "Label that will trigger the approve"
+  label-list:
+    description: "List of labels that enable a PR approval. Example: [test,demo,prep]"
     required: true
+  label-exclusion-list:
+    description: "List of labels that block a PR approval. Example: [conflicts,error,temp]"
+    required: false
 runs:
   using: node12
   main: dist/index.js
